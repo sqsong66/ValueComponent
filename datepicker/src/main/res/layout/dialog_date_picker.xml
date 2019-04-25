@@ -1,0 +1,291 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@drawable/bg_white_top_round_corner">
+
+    <TextView
+        android:id="@+id/cancel_tv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="6dp"
+        android:layout_marginLeft="6dp"
+        android:layout_marginTop="10dp"
+        android:background="?attr/selectableItemBackgroundBorderless"
+        android:padding="10dp"
+        android:text="取消"
+        android:textColor="@color/color333333"
+        android:textSize="16sp"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/confirm_tv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="10dp"
+        android:layout_marginRight="10dp"
+        android:background="?attr/selectableItemBackgroundBorderless"
+        android:padding="10dp"
+        android:text="确定"
+        android:textColor="@color/colorF08300"
+        android:textSize="16sp"
+        app:layout_constraintBottom_toBottomOf="@id/cancel_tv"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="@id/cancel_tv" />
+
+    <View
+        android:id="@+id/line"
+        android:layout_width="match_parent"
+        android:layout_height="1px"
+        android:layout_marginTop="10dp"
+        android:background="@color/colorLine"
+        app:layout_constraintTop_toBottomOf="@id/cancel_tv" />
+
+    <HorizontalScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/line">
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginLeft="10dp"
+            android:layout_marginTop="30dp"
+            android:layout_marginRight="10dp"
+            android:layout_marginBottom="30dp"
+            android:gravity="center"
+            android:orientation="horizontal">
+
+            <LinearLayout
+                android:id="@+id/year_ll"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:orientation="horizontal">
+
+                <com.sqsong.datepicker.wheel.WheelPicker
+                    android:id="@+id/year_wheel"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:paddingLeft="10dp"
+                    android:paddingRight="10dp"
+                    app:wheel_atmospheric="true"
+                    app:wheel_curved="true"
+                    app:wheel_cyclic="true"
+                    app:wheel_data="@array/year_array"
+                    app:wheel_indicator="true"
+                    app:wheel_indicator_color="@color/colorLine"
+                    app:wheel_indicator_size="1dp"
+                    app:wheel_item_text_color="@color/color666666"
+                    app:wheel_item_text_size="20sp"
+                    app:wheel_selected_item_text_color="@color/color333333" />
+
+                <TextView
+                    android:id="@+id/year_tv"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="年"
+                    android:textColor="@color/color333333"
+                    android:textSize="18sp"
+                    android:textStyle="bold" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/month_ll"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="5dp"
+                android:layout_marginLeft="5dp"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:orientation="horizontal">
+
+                <com.sqsong.datepicker.wheel.WheelPicker
+                    android:id="@+id/month_wheel"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:paddingLeft="10dp"
+                    android:paddingRight="10dp"
+                    app:wheel_atmospheric="true"
+                    app:wheel_curved="true"
+                    app:wheel_cyclic="true"
+                    app:wheel_indicator="true"
+                    app:wheel_indicator_color="@color/colorLine"
+                    app:wheel_indicator_size="1dp"
+                    app:wheel_item_text_color="@color/color666666"
+                    app:wheel_item_text_size="20sp"
+                    app:wheel_selected_item_text_color="@color/color333333" />
+
+                <TextView
+                    android:id="@+id/month_tv"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="月"
+                    android:textColor="@color/color333333"
+                    android:textSize="18sp"
+                    android:textStyle="bold" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/day_ll"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="5dp"
+                android:layout_marginLeft="5dp"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:orientation="horizontal">
+
+                <com.sqsong.datepicker.wheel.WheelPicker
+                    android:id="@+id/day_wheel"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:paddingLeft="10dp"
+                    android:paddingRight="10dp"
+                    app:wheel_atmospheric="true"
+                    app:wheel_curved="true"
+                    app:wheel_cyclic="true"
+                    app:wheel_indicator="true"
+                    app:wheel_indicator_color="@color/colorLine"
+                    app:wheel_indicator_size="1dp"
+                    app:wheel_item_text_color="@color/color666666"
+                    app:wheel_item_text_size="20sp"
+                    app:wheel_selected_item_text_color="@color/color333333" />
+
+                <TextView
+                    android:id="@+id/day_tv"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="日"
+                    android:textColor="@color/color333333"
+                    android:textSize="18sp"
+                    android:textStyle="bold" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/hour_ll"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="5dp"
+                android:layout_marginLeft="5dp"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:orientation="horizontal"
+                android:visibility="visible">
+
+                <com.sqsong.datepicker.wheel.WheelPicker
+                    android:id="@+id/hour_wheel"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:paddingLeft="10dp"
+                    android:paddingRight="10dp"
+                    app:wheel_atmospheric="true"
+                    app:wheel_curved="true"
+                    app:wheel_cyclic="true"
+                    app:wheel_indicator="true"
+                    app:wheel_indicator_color="@color/colorLine"
+                    app:wheel_indicator_size="1dp"
+                    app:wheel_item_text_color="@color/color666666"
+                    app:wheel_item_text_size="20sp"
+                    app:wheel_selected_item_text_color="@color/color333333" />
+
+                <TextView
+                    android:id="@+id/hour_tv"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="时"
+                    android:textColor="@color/color333333"
+                    android:textSize="18sp"
+                    android:textStyle="bold" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/minute_ll"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="10dp"
+                android:layout_marginLeft="10dp"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:orientation="horizontal"
+                android:visibility="visible">
+
+                <com.sqsong.datepicker.wheel.WheelPicker
+                    android:id="@+id/minute_wheel"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:paddingLeft="5dp"
+                    android:paddingRight="5dp"
+                    app:wheel_atmospheric="true"
+                    app:wheel_curved="true"
+                    app:wheel_cyclic="true"
+                    app:wheel_indicator="true"
+                    app:wheel_indicator_color="@color/colorLine"
+                    app:wheel_indicator_size="1dp"
+                    app:wheel_item_text_color="@color/color666666"
+                    app:wheel_item_text_size="20sp"
+                    app:wheel_selected_item_text_color="@color/color333333" />
+
+                <TextView
+                    android:id="@+id/minute_tv"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="分"
+                    android:textColor="@color/color333333"
+                    android:textSize="18sp"
+                    android:textStyle="bold" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/second_ll"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="5dp"
+                android:layout_marginLeft="5dp"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:orientation="horizontal"
+                android:visibility="visible">
+
+                <com.sqsong.datepicker.wheel.WheelPicker
+                    android:id="@+id/second_wheel"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:paddingLeft="10dp"
+                    android:paddingRight="10dp"
+                    app:wheel_atmospheric="true"
+                    app:wheel_curved="true"
+                    app:wheel_cyclic="true"
+                    app:wheel_indicator="true"
+                    app:wheel_indicator_color="@color/colorLine"
+                    app:wheel_indicator_size="1dp"
+                    app:wheel_item_text_color="@color/color666666"
+                    app:wheel_item_text_size="20sp"
+                    app:wheel_selected_item_text_color="@color/color333333" />
+
+                <TextView
+                    android:id="@+id/second_tv"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="秒"
+                    android:textColor="@color/color333333"
+                    android:textSize="18sp"
+                    android:textStyle="bold" />
+
+            </LinearLayout>
+
+        </LinearLayout>
+
+    </HorizontalScrollView>
+</androidx.constraintlayout.widget.ConstraintLayout>
