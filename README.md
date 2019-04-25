@@ -1,0 +1,2 @@
+# ValueComponent
+Some useful component.
