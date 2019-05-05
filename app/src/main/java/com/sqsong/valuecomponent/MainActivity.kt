@@ -9,6 +9,7 @@ import butterknife.OnClick
 import butterknife.Unbinder
 import com.sqsong.datepicker.DatePickerDialog
 import com.sqsong.datepicker.utils.WheelDateUtils
+import com.sqsong.valuecomponent.dialog.LoadingDialog
 import java.util.*
 
 class MainActivity : AppCompatActivity(), DatePickerDialog.OnDateActionListener {
@@ -21,11 +22,16 @@ class MainActivity : AppCompatActivity(), DatePickerDialog.OnDateActionListener 
         mUnbinder = ButterKnife.bind(this)
     }
 
-    @OnClick(R.id.date_picker_btn)
+    @OnClick(R.id.date_picker_btn, R.id.loading_btn)
     fun onClick(view: View) {
         when (view.id) {
             R.id.date_picker_btn -> showDatePicker()
+            R.id.loading_btn -> showLoading()
         }
+    }
+
+    private fun showLoading() {
+        LoadingDialog().show(supportFragmentManager, "")
     }
 
     private fun showDatePicker() {
