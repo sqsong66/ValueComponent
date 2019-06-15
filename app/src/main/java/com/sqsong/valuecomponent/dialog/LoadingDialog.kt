@@ -12,6 +12,7 @@ import android.view.ViewGroup
 import android.view.Window
 import android.widget.TextView
 import androidx.fragment.app.DialogFragment
+import com.sqsong.datepicker.utils.DensityUtils
 import com.sqsong.valuecomponent.R
 import kotlinx.android.synthetic.main.dialog_loading.*
 
@@ -21,7 +22,7 @@ class LoadingDialog : DialogFragment() {
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         dialog.window?.requestFeature(Window.FEATURE_NO_TITLE)
-        dialog.setCanceledOnTouchOutside(true)
+        dialog.setCanceledOnTouchOutside(false)
         dialog.window?.setBackgroundDrawableResource(android.R.color.transparent)
         return inflater.inflate(R.layout.dialog_loading, container, false)
     }
@@ -29,6 +30,11 @@ class LoadingDialog : DialogFragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         initEvent()
+    }
+
+    override fun onActivityCreated(savedInstanceState: Bundle?) {
+        super.onActivityCreated(savedInstanceState)
+        dialog?.window?.attributes?.width = DensityUtils.dip2px(250)
     }
 
     private fun initEvent() {
@@ -42,12 +48,8 @@ class LoadingDialog : DialogFragment() {
             addUpdateListener {
                 val dotsCount = it.animatedValue as Int
                 if (dotsCount < 4) {
-                    spannable.setSpan(
-                        colorSpan,
-                        text.length - 3 + dotsCount,
-                        loadingText.text.length,
-                        Spannable.SPAN_INCLUSIVE_INCLUSIVE
-                    )
+                    spannable.setSpan(colorSpan, spannable.length - 3 + dotsCount, spannable.length,
+                            Spannable.SPAN_INCLUSIVE_EXCLUSIVE)
                     loadingText.invalidate()
                 }
             }

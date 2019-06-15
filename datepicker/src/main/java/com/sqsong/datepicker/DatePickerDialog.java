@@ -6,25 +6,18 @@ import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.util.Log;
-import android.view.Gravity;
-import android.view.LayoutInflater;
-import android.view.View;
-import android.view.ViewGroup;
-import android.view.Window;
-import android.view.WindowManager;
+import android.view.*;
 import android.widget.LinearLayout;
-
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.fragment.app.DialogFragment;
+import androidx.fragment.app.Fragment;
 import com.sqsong.datepicker.utils.DensityUtils;
 import com.sqsong.datepicker.utils.WheelDateUtils;
 import com.sqsong.datepicker.wheel.WheelPicker;
 
 import java.util.Calendar;
 import java.util.List;
-
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-import androidx.fragment.app.DialogFragment;
-import androidx.fragment.app.Fragment;
 
 public class DatePickerDialog extends DialogFragment implements WheelPicker.OnItemSelectedListener {
 
@@ -357,15 +350,6 @@ public class DatePickerDialog extends DialogFragment implements WheelPicker.OnIt
             minuteWheel.setSelectedItemPosition(mMinuteIndex, false);
             secondWheel.setSelectedItemPosition(mSecondIndex, false);
         });
-    }
-
-    @Override
-    public void onDestroy() {
-        super.onDestroy();
-//        if (mUnbinder != null) {
-//            mUnbinder.unbind();
-//            mUnbinder = null;
-//        }
     }
 
     public interface OnDateActionListener {

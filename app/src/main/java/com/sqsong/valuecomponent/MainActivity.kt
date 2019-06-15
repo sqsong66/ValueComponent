@@ -40,7 +40,7 @@ class MainActivity : AppCompatActivity(), DatePickerDialog.OnDateActionListener 
         val year = calendar.get(Calendar.YEAR)
         calendar.set(Calendar.YEAR, year - 20)
         val startMillis = calendar.timeInMillis
-        DatePickerDialog.newInstance(startMillis, endMillis, endMillis, WheelDateUtils.MODE_YMDHMS, 0)
+        DatePickerDialog.newInstance(startMillis, endMillis, endMillis, WheelDateUtils.MODE_YMDHM, 0)
             .show(supportFragmentManager, "")
     }
 
