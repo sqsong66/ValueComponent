@@ -6,7 +6,9 @@
 
     <color name="color333333">#333333</color>
     <color name="color666666">#666666</color>
+    <color name="color999999">#999999</color>
     <color name="colorF08300">#F08300</color>
     <color name="colorLine">#F5F5F5</color>
     <color name="colorWhite">#FFFFFF</color>
+    <color name="colorF1F1F1">#F1F1F1</color>
 </resources>

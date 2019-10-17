@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <declare-styleable name="FoodSafetyHistogram">
+        <attr name="fsh_width" format="dimension" />
+        <attr name="fsh_vertical_gap" format="dimension" />
+        <attr name="fsh_horizontal_gap" format="dimension" />
+        <attr name="fsh_side_gap" format="dimension" />
+        <attr name="fsh_bottom_line_color" format="color" />
+        <attr name="fsh_bottom_line_height" format="dimension" />
+        <attr name="fsh_percent_color" format="color" />
+        <attr name="fsh_percent_size" format="dimension" />
+        <attr name="fsh_name_color" format="color" />
+        <attr name="fsh_name_size" format="dimension" />
+        <attr name="fsh_histogram_color" format="color" />
+        <attr name="fsh_histogram_radius" format="dimension" />
+        <attr name="fsh_animate_duration" format="integer" />
+    </declare-styleable>
+
+    <declare-styleable name="MaxHeightRecyclerView">
+        <attr name="mhr_maxHeight" format="dimension" />
+    </declare-styleable>
+
+</resources>
