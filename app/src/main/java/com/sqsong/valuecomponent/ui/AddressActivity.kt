@@ -2,19 +2,17 @@ package com.sqsong.valuecomponent.ui
 
 import android.Manifest
 import android.os.Bundle
-import android.util.Log
 import android.view.View
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import androidx.fragment.app.Fragment
 import com.google.gson.Gson
 import com.google.gson.reflect.TypeToken
 import com.sqsong.valuecomponent.R
-import com.sqsong.valuecomponent.bean.City
-import com.sqsong.valuecomponent.bean.County
-import com.sqsong.valuecomponent.bean.Province
-import com.sqsong.valuecomponent.bean.Town
+import com.sqsong.valuecomponent.bean.*
 import com.sqsong.valuecomponent.db.AddressRoomDatabase
 import com.sqsong.valuecomponent.dialog.LoadingDialog
+import com.sqsong.valuecomponent.dialog.OnAddressSelectedListener
 import com.sqsong.valuecomponent.dialog.SelectAddressDialog
 import com.tbruyelle.rxpermissions2.RxPermissions
 import io.reactivex.Observable
@@ -25,8 +23,9 @@ import kotlinx.android.synthetic.main.activity_address.*
 import java.io.BufferedReader
 import java.io.InputStreamReader
 
-class AddressActivity : AppCompatActivity(), View.OnClickListener {
+class AddressActivity : AppCompatActivity(), View.OnClickListener, OnAddressSelectedListener {
 
+    private var mAddressData: AddressData? = null
     private var mLoadingDialog: LoadingDialog? = null
     private var mRxPermissions: RxPermissions? = null
     private var mCompositeDisposable: CompositeDisposable? = null
@@ -42,6 +41,20 @@ class AddressActivity : AppCompatActivity(), View.OnClickListener {
         mRxPermissions = RxPermissions(this)
         insertBtn.setOnClickListener(this)
         showAddressBtn.setOnClickListener(this)
+    }
+
+    override fun onAttachFragment(fragment: Fragment) {
+        super.onAttachFragment(fragment)
+        if (fragment is SelectAddressDialog) {
+            fragment.setOnAddressSelectedListener(this)
+        }
+    }
+
+    override fun onAddressSelected(addressData: AddressData) {
+        mAddressData = addressData
+        val address =
+            "${addressData.province?.name} ${addressData.city?.name} ${addressData.county?.name} ${addressData.town?.name} "
+        Toast.makeText(this, address, Toast.LENGTH_SHORT).show()
     }
 
     override fun onClick(v: View?) {
@@ -87,7 +100,7 @@ class AddressActivity : AppCompatActivity(), View.OnClickListener {
     }
 
     private fun showAddressDialog() {
-        SelectAddressDialog().show(supportFragmentManager, "")
+        SelectAddressDialog.newInstance(mAddressData).show(supportFragmentManager, "")
     }
 
     private fun insertDataToDB() {
@@ -131,7 +144,8 @@ class AddressActivity : AppCompatActivity(), View.OnClickListener {
         val cityMap = gson.fromJson<LinkedHashMap<String, List<City>>>(cityReader, cityType)
         if (cityMap.isNotEmpty()) {
             addressDao.clearCityData()
-            for ((_, value) in cityMap) {
+            for ((key, value) in cityMap) {
+                value.forEach { it.parentId = key }
                 addressDao.insertCityList(value)
             }
         }
@@ -142,12 +156,11 @@ class AddressActivity : AppCompatActivity(), View.OnClickListener {
         val countyMap = gson.fromJson<LinkedHashMap<String, List<County>>>(countyReader, countyType)
         if (countyMap.isNotEmpty()) {
             addressDao.clearCountyData()
-            for ((_, value) in countyMap) {
+            for ((key, value) in countyMap) {
+                value.forEach { it.parentId = key }
                 addressDao.insertCountyList(value)
             }
         }
-        val allCounty = addressDao.queryAllCounties()
-        Log.e("sqsong", "County size: ${allCounty.size}")
 
         // Town
         val townType = object : TypeToken<LinkedHashMap<String, List<Town>>>() {}.type
@@ -155,13 +168,11 @@ class AddressActivity : AppCompatActivity(), View.OnClickListener {
         val townMap = gson.fromJson<LinkedHashMap<String, List<Town>>>(townReader, townType)
         if (townMap.isNotEmpty()) {
             addressDao.clearTownData()
-            for ((_, value) in townMap) {
+            for ((key, value) in townMap) {
+                value.forEach { it.parentId = key }
                 addressDao.insertTownList(value)
             }
         }
-
-        val town = addressDao.queryTown("460400500000")
-        Log.i("sqsong", "Town Name --> ${town.name}, City --> ${town.city}, Id -> ${town.id}")
     }
 
 

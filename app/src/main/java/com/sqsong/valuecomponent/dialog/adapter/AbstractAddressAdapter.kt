@@ -29,22 +29,27 @@ abstract class AbstractAddressAdapter<T>(
         holder.bindData(dataList[position], position)
     }
 
+    fun resetAdapter(index: Int = -1) {
+        mSelectedPosition = index
+        notifyDataSetChanged()
+    }
+
     abstract fun bindAddressData(data: T, textView: TextView)
 
     inner class AddressViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
 
-        private val selectIv = itemView.findViewById<ImageView>(R.id.selectIv)
         private val nameTv = itemView.findViewById<TextView>(R.id.nameTv)
+        private val selectIv = itemView.findViewById<ImageView>(R.id.selectIv)
 
         fun bindData(data: T, position: Int) {
             bindAddressData(data, nameTv)
 
             if (mSelectedPosition == position) {
                 selectIv.visibility = View.VISIBLE
-                nameTv.setTypeface(nameTv.typeface, Typeface.BOLD)
+                nameTv.setTypeface(null, Typeface.BOLD)
             } else {
                 selectIv.visibility = View.GONE
-                nameTv.setTypeface(nameTv.typeface, Typeface.NORMAL)
+                nameTv.setTypeface(null, Typeface.NORMAL)
             }
 
             itemView.setOnClickListener {

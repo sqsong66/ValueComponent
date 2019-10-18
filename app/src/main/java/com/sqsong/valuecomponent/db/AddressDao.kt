@@ -36,6 +36,9 @@ interface AddressDao {
     @Query("select * from city")
     fun queryAllCities(): List<City>
 
+    @Query("select * from city where parentId = :parentId")
+    fun queryCity(parentId: String): List<City>
+
     @Query("delete from city")
     fun clearCityData()
 
@@ -47,6 +50,9 @@ interface AddressDao {
 
     @Query("delete from county")
     fun clearCountyData()
+
+    @Query("select * from county where parentId = :parentId and name != '市辖区'")
+    fun queryCounty(parentId: String): List<County>
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     fun insertTown(town: Town): Long
@@ -60,6 +66,8 @@ interface AddressDao {
     @Query("delete from town")
     fun clearTownData()
 
-    @Query("select * from town where id = :id")
-    fun queryTown(id: String): Town
+    @Query("select * from town where parentId = :parentId")
+    fun queryTown(parentId: String): List<Town>
+
+
 }
