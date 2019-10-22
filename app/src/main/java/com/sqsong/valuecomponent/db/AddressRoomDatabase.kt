@@ -9,7 +9,7 @@ import com.sqsong.valuecomponent.bean.County
 import com.sqsong.valuecomponent.bean.Province
 import com.sqsong.valuecomponent.bean.Town
 
-@Database(entities = [Province::class, City::class, County::class, Town::class], version = 1)
+@Database(entities = [Province::class, City::class, County::class, Town::class], exportSchema = false, version = 1)
 abstract class AddressRoomDatabase : RoomDatabase() {
 
     abstract fun addressDao(): AddressDao

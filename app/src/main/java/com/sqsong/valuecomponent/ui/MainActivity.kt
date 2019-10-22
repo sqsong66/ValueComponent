@@ -1,5 +1,6 @@
 package com.sqsong.valuecomponent.ui
 
+import android.Manifest
 import android.content.Intent
 import android.os.Bundle
 import android.view.View
@@ -13,24 +14,29 @@ import com.sqsong.datepicker.utils.WheelDateUtils
 import com.sqsong.valuecomponent.R
 import com.sqsong.valuecomponent.dialog.LoadingDialog
 import com.sqsong.valuecomponent.view.HistogramData
+import com.tbruyelle.rxpermissions2.RxPermissions
 import kotlinx.android.synthetic.main.activity_main.*
 import java.util.*
 
 class MainActivity : AppCompatActivity(), DatePickerDialog.OnDateActionListener {
 
     private var mUnbinder: Unbinder? = null
+    private var mRxPermissions: RxPermissions? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
         mUnbinder = ButterKnife.bind(this)
+
+        mRxPermissions = RxPermissions(this)
     }
 
     @OnClick(
         R.id.date_picker_btn,
         R.id.loading_btn,
         R.id.histogram_btn,
-        R.id.address_btn
+        R.id.address_btn,
+        R.id.viewPagerTransformerBtn
     )
     fun onClick(view: View) {
         when (view.id) {
@@ -38,6 +44,16 @@ class MainActivity : AppCompatActivity(), DatePickerDialog.OnDateActionListener 
             R.id.loading_btn -> showLoading()
             R.id.histogram_btn -> setHistogramData()
             R.id.address_btn -> startActivity(Intent(this, AddressActivity::class.java))
+            R.id.viewPagerTransformerBtn -> {
+                mRxPermissions?.request(Manifest.permission.WRITE_EXTERNAL_STORAGE)
+                    ?.subscribe {
+                        if (it) {
+                            startActivity(Intent(this, ViewPagerTransformerActivity::class.java))
+                        } else {
+                            Toast.makeText(this, "", Toast.LENGTH_SHORT).show()
+                        }
+                    }
+            }
         }
     }
 

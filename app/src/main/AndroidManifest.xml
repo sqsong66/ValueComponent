@@ -17,11 +17,15 @@
         <activity android:name=".ui.MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
+                <action android:name="android.intent.action.VIEW" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
         <activity android:name=".ui.AddressActivity" />
+        <activity
+            android:name=".ui.ViewPagerTransformerActivity"
+            android:theme="@style/AppTheme.FullScreenTheme" />
     </application>
 
 </manifest>
